@@ -1,0 +1,237 @@
+/*	---ACCUEIL--- 	*/
+
+.li-menu{
+	font-size: 85%;
+}
+
+.li-home{
+	padding-left: 2%;
+}
+
+#li-forteroche{
+	font-size: 100%;
+}
+
+#section-biography{
+ 	margin-top: 10vh;
+}
+
+#div-biography{
+	flex-direction: row;
+	width: 94%;
+    margin-left: 3%;
+}
+
+#image-biography{
+	height: 75vh;
+	margin-top: 4vh;
+    width: 40%;  
+}
+
+#div-text-biography{
+	padding-bottom: 15vh;
+}
+
+.text-biography{
+	text-align: left;
+}
+
+
+/*	---CONTACT	---*/
+
+#form-contact {
+    width: 90%;
+    margin-left: 5%;
+}
+
+#icone-email-contact, #icone-name-contact, #icone-subject-contact{
+	font-size: 90%;
+}
+
+#icone-name-contact{
+	margin: auto;
+}
+
+#div-icone-email-contact, #div-icone-name-contact {
+    width: 13.5%;
+}
+
+#textarea-contact{
+	width: 98.5%;
+}
+
+/*	---BILLETS --- 	*/
+
+.present-read, #title-read{
+	width: 75%;
+    margin-left: 12.5%;
+}
+
+.present-read{
+	height: 55vh;
+}
+
+.title-chapter-read{
+	padding-top: 10%;
+}
+
+.text-chapter-read{
+	height: 20vh;
+	top: 30%;
+	font-size: 80%;
+	word-break: break-word;
+}
+
+.button-chapter-read{
+	width: 30%;
+}
+
+/*	---LECTURE---	*/
+
+#section-billet{
+	width: 85%;
+    margin-left: 7.5%;
+}
+
+.img-billet{
+	left: 15%;
+    width: 70%;
+}
+
+#title-billet{
+	margin-left: 20%;
+	margin-top: 1vh;
+    width: 70%;
+}
+
+#figure-billet{
+	margin-bottom: 10vh;
+}
+
+.text-billet{
+	font-size: 100%;
+	width: 95%;
+    line-height: 155%;
+    margin-left: 2.5%;
+}
+
+.date-billet{
+	left: 2.5%;
+}
+
+#section-comment{
+	width: 90%;
+	margin-left: 5%;
+}
+
+#title-comment{
+	padding-bottom: 3vh;
+	font-size: 145%;
+}
+
+#button-add-comment{
+	width: 25%;
+	padding: 1.5vh 0px;
+	font-size: 80%;
+}
+
+.comment-pseudo{
+	font-size: 110%;
+}
+
+.comment-text{
+	font-size: 95%;
+}
+
+.comment-date{
+	font-size: 85%;
+}
+
+.div-comment-button{
+	width: 13%;
+}
+
+.button-signal-comment{
+	display: flex;
+	padding: 0.5vh 0px;
+}
+
+.a-signal-comment{
+	font-size: 80%;
+    margin: auto;
+}
+
+.fa-exclamation-triangle{
+	font-size: 80%;
+    margin-left: 8%;
+    margin: auto;
+}
+
+/*	---CONNECT---	*/
+
+#form-connect{
+    width: 60% !important;
+    margin-left: 20% !important;
+}
+
+/*  -------------- ADMIN  ---------------*/
+/*  -------------- ADMIN  ---------------*/
+/*  -------------- ADMIN  ---------------*/
+
+
+/* ----ADMIN WRITE---*/
+#title-admin-write{
+	width: 90% !important;
+	height: 10vh !important;
+	margin: 5vh auto !important;
+	font-size: 140%;
+}
+
+.div-flex-admin-writer{
+	width: 100% !important;
+}
+
+#input-title-admin-write{
+	width: 99.5% !important;
+	height: 4vh !important;
+}
+
+#submit-admin-write{
+	width: 20% !important;
+	margin-left: 40% !important;
+}
+
+/* ---- ADMIN HOME---*/
+
+.h2-admin-home{
+	width: 40% !important;
+}
+
+/* --- DECONNECTION ---*/
+
+#disconnect-div{
+	width: 55% !important;
+    margin-left: 22.5% !important;
+}
+
+.disconnect-button{
+	padding: 3px 25px !important;
+}
+
+/*	---FOOTER---	*/
+
+.footer-menu{
+	font-size: 80%;
+}
+
+#ul-footer-menu{
+	text-align: left;
+}
+
+.footer-menu-biography{
+
+}
+
+#text-footer{
+	font-size: 85%;
+}

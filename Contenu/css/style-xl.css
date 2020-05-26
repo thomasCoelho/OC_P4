@@ -1,0 +1,264 @@
+/* --- HEADER ---*/
+
+.li-menu{
+	font-size: 250%;
+}
+
+#li-forteroche{
+	font-size: 260%;
+}
+
+/*	---ACCUEIL--- 	*/
+
+#text-alaska-accueil{
+	font-size: 400%;
+}
+
+.fa-arrow-alt-circle-down{
+	font-size: 500%;
+}
+
+#div-biography{
+	flex-direction: row;
+	width: 94%;
+    margin-left: 3%;
+}
+
+#image-biography{
+	height: auto;
+	margin-top: 4vh;
+    width: 35%; 
+}
+
+#div-text-biography{
+	padding-bottom: 15vh;
+	font-size: 250%;
+	width: 75%;
+}
+
+#auteur-sign{
+	width: 20%;
+}
+
+#quote-text-biography{
+	bottom: 8vh;
+	font-size: 110%;
+}
+
+/*	---CONTACT	---*/
+
+#form-contact {
+    width: 90%;
+    margin-left: 5%;
+}
+
+#icone-email-contact, #icone-name-contact, #icone-subject-contact{
+	font-size: 250%;
+}
+
+#input-email-contact, #input-name-contact, #input-subject-contact{
+	font-size: 200%;
+}
+
+#div-icone-email-contact, #div-icone-name-contact {
+    width: 13.5%;
+}
+
+#textarea-contact{
+	width: 98.5%;
+}
+
+/*	---BILLETS --- 	*/
+
+.present-read, #title-read{
+	width: 75%;
+    margin-left: 12.5%;
+}
+
+#title-read{
+	font-size: 400%;
+}
+
+.present-read{
+	height: 55vh;
+}
+
+.title-chapter-read{
+	padding-top: 10%;
+	font-size: 500%;
+}
+
+.text-chapter-read{
+	height: 27vh;
+    top: 30%;
+    font-size: 230%;
+}
+
+.button-chapter-read{
+	width: 25%;
+    font-size: 250%;
+}
+
+/*	---LECTURE---	*/
+
+#section-billet{
+	width: 85%;
+    margin-left: 7.5%;
+}
+
+.img-billet{
+	left: 15%;
+    width: 70%;
+}
+
+#title-billet{
+	margin-left: 20%;
+    margin-top: 0vh;
+    height: 17vh;
+    width: 70%;
+    font-size: 500%;
+}
+
+.text-billet{
+	font-size: 240%;
+    line-height: 170%;
+}
+
+.date-billet{
+	font-size: 200%;
+}
+
+#section-comment{
+	width: 90%;
+	margin-left: 5%;
+}
+
+#title-comment{
+	padding-bottom: 3vh;
+	font-size: 300%;
+	border-width: 3px;
+}
+
+#button-add-comment{
+	width: 20%;
+    padding: 1.5vh 0px;
+    font-size: 200%;
+}
+
+.comment-pseudo{
+	font-size: 240%;
+}
+
+.comment-text{
+	font-size: 230%;
+}
+
+.comment-date{
+	font-size: 210%;
+}
+
+.div-comment-button{
+	width: 13%;
+}
+
+.comment-edit, .button-signal-comment, #billet-edit{
+	padding: 0.5vh 0px;
+	font-size: 250%;
+}
+
+/*	---CONNECT---	*/
+
+#form-connect{
+    width: 60%;
+    margin-left: 20%;
+}
+
+#title-connect{
+	font-size: 400%;
+}
+
+.input-connect{
+	height: 4.3vh;
+	font-size: 280% !important;
+}
+
+input:focus{
+	font-size: 300%;
+}
+
+#submit-connect{
+	font-size: 300%;
+}
+
+/*  -------------- ADMIN  ---------------*/
+/*  -------------- ADMIN  ---------------*/
+/*  -------------- ADMIN  ---------------*/
+
+
+/* ----ADMIN WRITE---*/
+#title-admin-write{
+	height: 10vh;
+    margin: 5vh auto;
+    font-size: 340%;
+}
+
+#input-title-admin-write{
+	width: 99.5%;
+	font-size: 240%;
+}
+
+.mce-content-body{
+	font-size: 330%;
+}
+
+#submit-admin-write{
+	width: 20%;
+	margin-left: 40%;
+}
+
+/* ---- ADMIN HOME---*/
+
+.h2-admin-home{
+	width: 25%;
+    font-size: 330%;
+}
+
+.button-moderation{
+	font-size: 180%;
+}
+
+.div-content-contact{
+	font-size: 260%;
+}
+
+.archiver-button-moderation{
+	font-size: 230%;
+}
+
+/* --- DECONNECTION ---*/
+
+#disconnect-div{
+	width: 30%;
+    margin-left: 35%;
+}
+
+#disconnect-title{
+	font-size: 350%;
+}
+
+.disconnect-button{
+	padding: 3px 25px;
+	font-size: 280%;
+}
+
+
+/*	---FOOTER---	*/
+
+.footer-menu{
+	font-size: 250%;
+}
+
+
+#text-footer{
+	font-size: 220%;
+}
