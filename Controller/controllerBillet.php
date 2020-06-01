@@ -51,16 +51,24 @@ class ControllerBillet {
 
 	/* EDIT COMMENTS */
 
-	function signalComment($idComment){
-		$this->comments->signalComment($idComment);
+	function signalComment(){
+		if(isset($_GET['comment_id'])){
+        	$idComment = htmlspecialchars($_GET['comment_id']);
+			$this->comments->signalComment($idComment);
+		}
 	}
 
 	function safeComment($idComment){
 		$this->comments->safeComment($idComment);
 	}
 
-	function deleteComment($idComment){
-		$this->comments->deleteComment($idComment);
+	function deleteComment(){
+		if(isset($_GET['comment'])){
+            $commentId = htmlspecialchars(intval($_GET['comment']));
+            if ($commentId != 0) {
+				$this->comments->deleteComment($commentId);
+			}
+		}
 	}
 }
 

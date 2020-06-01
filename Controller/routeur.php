@@ -42,36 +42,18 @@ class Routeur {
       if ($_GET['action'] == 'ContactTreatment') {
         $this->ctrlContactTreatment = new ControllerContact();
         $this->ctrlContactTreatment->issetContact();
-        }
       }
 
       if ($_GET['action'] == 'Lecture'){        
         $this->ctrlBillet = new ControllerBillet();
         $this->ctrlBillet->issetBillet();            
-            if(isset($_GET['comment_id'])){
-              $idComment = htmlspecialchars($_GET['comment_id']);
-              $this->ctrlBillet->signalComment($idComment);
-            }
-            if(isset($_GET['comment'])){
-              $commentId = htmlspecialchars(intval($_GET['comment']));
-              if ($commentId != 0) {
-                $this->ctrlBillet->deleteComment($commentId);
-              }              
-            }
-            $this->ctrlBillet->getReadBillet($idBillet);      
-          }
-        }
-        else{    
-          $this->ctrlRead = new ControllerBillet();
-          $this->ctrlRead->getReadBillets();
-         }
+        $this->ctrlBillet->signalComment();
+        $this->ctrlBillet->deleteComment();
       }
 
       if ($_GET['action'] == 'traitementComment'){
-        if (isset($_POST['user-pseudo'], $_POST['user-text'], $_POST['billet-id'])) {
           $this->ctrlTreatmentComments = new ControllerBillet();
           $this->ctrlTreatmentComments->issetComments();
-        }
       }  
 
       if ($_GET['action'] == 'AdminWrite'){
