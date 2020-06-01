@@ -1,7 +1,6 @@
 <?php
 
-require_once 'modele/modeleRead.php';
-require_once 'modele/modeleComments.php';
+require_once 'Model/modeleRead.php';
 require_once 'Vue/vue.php';
 
 class ControllerBillet {
@@ -11,7 +10,7 @@ class ControllerBillet {
 
 	function __construct(){
 		$this->billet = new Billet();
-		$this->comments = new Comments();
+		$this->comments = new Billet();
 	}
 
 
@@ -25,10 +24,10 @@ class ControllerBillet {
 		}
 	}
 
-	function getRead($idBillet){
+	function getReadBillet($idBillet){
 		$billet = $this->billet->getBillet($idBillet);
 		$comments = $this->comments->getComments($idBillet);
-		
+		$billetsGet = $this->billet->getBillets();		
 		try {
 			$vue = new Vue('Billet');
 			$vue->generer(array('billet' => $billet, 'comments' => $comments));
@@ -37,6 +36,19 @@ class ControllerBillet {
 		    echo $e->getMessage(), "\n";
 		}
 	}
+
+	function getReadBillets(){
+		$billetsGet = $this->billet->getBillets();	
+		try {
+			$vue = new Vue('Read');
+			$vue->generer(array('billets' => $billetsGet));
+		} 
+		catch (Exception $e) {
+		    echo $e->getMessage(), "\n";
+		}
+	}
+
+	/* EDIT COMMENTS */
 
 	function signalComment($idComment){
 		$this->comments->signalComment($idComment);
@@ -49,4 +61,37 @@ class ControllerBillet {
 	function deleteComment($idComment){
 		$this->comments->deleteComment($idComment);
 	}
+}
+
+class ControllerEditBillet {
+	/* EDIT BILLET */
+
+	function editBillet($image, $title, $text, $id){
+		if(isset($image, $title, $text, $id)){
+			$this->billet->editBillet($image, $title, $text, $id);
+		}
+	}
+
+	function stringRemplaceP($string){		
+    	$string = str_replace(array('<p>','</p>' ), "", $string);
+    	return $string;
+	}
+
+	function deleteBillet($id){
+		$this->billet->deleteBillet($id);
+		$this->comments->deleteComments($id);
+	}
+
+	function getRead($idBillet){
+		$billet = $this->billet->getBillet($idBillet);
+		try {
+			$vue = new Vue('EditBillet');
+			$vue->generer(array('billet' => $billet));
+		} 
+		catch (Exception $e) {
+		    echo $e->getMessage(), "\n";
+		}
+	}
+
+	
 }
