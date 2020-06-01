@@ -14,14 +14,15 @@ class ControllerContact{
 		$this->contact = new Contact();
 	}
 
-	function insertContact($email, $prenom, $objet, $message){
-		$this->contact->InsertContact($email, $prenom, $objet, $message);
-		header('Location: index.php?action=Contact');			
-	}
-
-	function stringRemplace($string){		
-    	$string = str_replace("'", "\'", $string);
-    	return $string;
+	function issetContact(){
+		if(isset($_POST['email-contact'], $_POST['name-contact'], $_POST['subject-contact'], $_POST['message-contact'])){			
+			function stringRemplace($string){		
+		    	$string = str_replace("'", "\'", $string);
+		    	return $string;
+			}
+			$this->contact->InsertContact(stringRemplace($_POST['email-contact']), stringRemplace($_POST['name-contact']), stringRemplace($_POST['subject-contact']), stringRemplace($_POST['message-contact']));
+			header('Location: index.php?action=Contact');			
+		}
 	}
 
 	function getRead(){

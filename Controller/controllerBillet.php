@@ -14,8 +14,8 @@ class ControllerBillet {
 	}
 
 
-  	function issetComments($pseudo, $text, $idBillet){
-		if(isset($pseudo, $text, $idBillet)){			
+  	function issetComments(){
+		if(isset($_POST['user-pseudo'], $_POST['user-text'], $_POST['billet-id'])){			
 			$this->comments->insertComment(addslashes(htmlspecialchars($_POST['user-pseudo'])),addslashes(htmlspecialchars($_POST['user-text'])), addslashes(htmlspecialchars($_POST['billet-id'])));
 			header('Location: index.php?action=Lecture&id='.$idBillet);
 		}
@@ -23,28 +23,29 @@ class ControllerBillet {
 			header('Location: index.php?action=Lecture&id='.$idBillet);	
 		}
 	}
-
-	function getReadBillet($idBillet){
-		$billet = $this->billet->getBillet($idBillet);
-		$comments = $this->comments->getComments($idBillet);
-		$billetsGet = $this->billet->getBillets();		
-		try {
-			$vue = new Vue('Billet');
-			$vue->generer(array('billet' => $billet, 'comments' => $comments));
-		} 
-		catch (Exception $e) {
-		    echo $e->getMessage(), "\n";
-		}
-	}
-
-	function getReadBillets(){
-		$billetsGet = $this->billet->getBillets();	
-		try {
-			$vue = new Vue('Read');
-			$vue->generer(array('billets' => $billetsGet));
-		} 
-		catch (Exception $e) {
-		    echo $e->getMessage(), "\n";
+	function issetBillet(){
+		if (isset($_GET['id'])) {
+        	$idBillet = htmlspecialchars(intval($_GET['id']));
+        	if ($idBillet != 0){    
+				$billet = $this->billet->getBillet($idBillet);
+				$comments = $this->comments->getComments($idBillet);		
+				try {
+					$vue = new Vue('Billet');
+					$vue->generer(array('billet' => $billet, 'comments' => $comments));
+				} 
+				catch (Exception $e) {
+				    echo $e->getMessage(), "\n";
+				}
+			}
+		}else{
+			$billetsGet = $this->billet->getBillets();	
+			try {
+				$vue = new Vue('Read');
+				$vue->generer(array('billets' => $billetsGet));
+			} 
+			catch (Exception $e) {
+			    echo $e->getMessage(), "\n";
+			}
 		}
 	}
 

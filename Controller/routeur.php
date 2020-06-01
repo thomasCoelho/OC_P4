@@ -45,11 +45,9 @@ class Routeur {
         }
       }
 
-      if ($_GET['action'] == 'Lecture'){
-        if (isset($_GET['id'])) {
-          $idBillet = htmlspecialchars(intval($_GET['id']));
-          if ($idBillet != 0){            
-            $this->ctrlBillet = new ControllerBillet();            
+      if ($_GET['action'] == 'Lecture'){        
+        $this->ctrlBillet = new ControllerBillet();
+        $this->ctrlBillet->issetBillet();            
             if(isset($_GET['comment_id'])){
               $idComment = htmlspecialchars($_GET['comment_id']);
               $this->ctrlBillet->signalComment($idComment);
