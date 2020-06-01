@@ -1,11 +1,8 @@
 <?php
-require_once 'Controller/controllerAccueil.php';
-require_once 'Controller/controllerContact.php';
 require_once 'Controller/controllerBillet.php';
-require_once 'Controller/controllerAdwinWrite.php';
+require_once 'Controller/controllerContact.php';
+require_once 'Controller/controllerAdmin.php';
 require_once 'Controller/controllerSession.php';
-require_once 'Controller/controllerAdminHome.php';
-require_once 'Controller/controllerDisconnect.php';
 require_once 'Controller/controllerCookie.php';
 require_once 'Vue/vue.php';
 
@@ -45,11 +42,11 @@ class Routeur {
       if ($_GET['action'] == 'ContactTreatment') {
         $this->ctrlContactTreatment = new ControllerContact();
         if(isset($_POST['email-contact'], $_POST['name-contact'], $_POST['subject-contact'], $_POST['message-contact'])){
-          $email = $this->ctrlContactTreatment->stringRemplace(htmlspecialchars($_POST['email-contact']));
-          $name = $this->ctrlContactTreatment->stringRemplace(htmlspecialchars($_POST['name-contact']));
-          $subject = $this->ctrlContactTreatment->stringRemplace(htmlspecialchars($_POST['subject-contact']));
-          $message = $this->ctrlContactTreatment->stringRemplace(htmlspecialchars($_POST['message-contact']));
-          $this->ctrlContactTreatment->insertContact($email,  $name,  $subject,  $message);
+          /*$email = $this->ctrlContactTreatment->stringRemplace($_POST['email-contact']);
+          $name = $this->ctrlContactTreatment->stringRemplace($_POST['name-contact']);
+          $subject = $this->ctrlContactTreatment->stringRemplace($_POST['subject-contact']);
+          $message = $this->ctrlContactTreatment->stringRemplace($_POST['message-contact']);*/
+          $this->ctrlContactTreatment->insertContact($_POST['email-contact'], $_POST['name-contact'], $_POST['subject-contact'], $_POST['message-contact']);
         }
       }
 
