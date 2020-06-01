@@ -66,17 +66,12 @@ class Routeur {
       if ($_GET['action'] == 'traitementAdminWrite' AND !isset($_GET['billet'])){
         $this->ctrlTraitementAdminWrite = new ControllerAdminWrite();
         $this->ctrlTraitementAdminWrite->getRead();
-        $image = htmlspecialchars($_POST['img-admin-write']);
-        $imageTraited = $this->ctrlTraitementAdminWrite->stringRemplaceP($image);
-        $title = htmlspecialchars($_POST['title-admin-write']);
-        $text = htmlspecialchars($_POST['text-admin-write']);
-        $textTraited = $this->ctrlTraitementAdminWrite->stringRemplace($text);
-        $this->ctrlTraitementAdminWrite->issetAdminWrite($imageTraited, $title, $textTraited);
+        $this->ctrlTraitementAdminWrite->issetAdminWrite();
       } 
 
       if($_GET['action'] == "traitementAdminWrite" AND isset($_GET['billet']) AND !isset($_GET['edit'])){
-        $this->ctrlUpdateBillet = new ControllerBillet();
-        $this->ctrlUpdateBillet->getReadUpdateBillet(htmlspecialchars($_GET['billet']));
+        $this->ctrlUpdateBillet = new ControllerEditBillet();
+        $this->ctrlUpdateBillet->getRead();
       }
 
       if ($_GET['action'] == "traitementAdminWrite" AND isset($_GET['edit']) AND isset($_GET['billet'])) {

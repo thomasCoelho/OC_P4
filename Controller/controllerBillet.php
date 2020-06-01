@@ -72,8 +72,23 @@ class ControllerBillet {
 	}
 }
 
+/* EDIT BILLET */
 class ControllerEditBillet {
-	/* EDIT BILLET */
+
+	function getRead(){
+		if (isset($_GET['billet'])){
+			$idBillet = htmlspecialchars(intval($_GET['billet']));
+			$billet = $this->billet->getBillet($idBillet);
+			try {
+				$vue = new Vue('EditBillet');
+				$vue->generer(array('billet' => $billet));
+			} 
+			catch (Exception $e) {
+			    echo $e->getMessage(), "\n";
+			}
+		}
+	}
+	
 
 	function editBillet($image, $title, $text, $id){
 		if(isset($image, $title, $text, $id)){
@@ -91,16 +106,7 @@ class ControllerEditBillet {
 		$this->comments->deleteComments($id);
 	}
 
-	function getRead($idBillet){
-		$billet = $this->billet->getBillet($idBillet);
-		try {
-			$vue = new Vue('EditBillet');
-			$vue->generer(array('billet' => $billet));
-		} 
-		catch (Exception $e) {
-		    echo $e->getMessage(), "\n";
-		}
-	}
+	
 
 	
 }
