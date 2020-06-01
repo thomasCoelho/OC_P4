@@ -41,12 +41,7 @@ class Routeur {
 
       if ($_GET['action'] == 'ContactTreatment') {
         $this->ctrlContactTreatment = new ControllerContact();
-        if(isset($_POST['email-contact'], $_POST['name-contact'], $_POST['subject-contact'], $_POST['message-contact'])){
-          /*$email = $this->ctrlContactTreatment->stringRemplace($_POST['email-contact']);
-          $name = $this->ctrlContactTreatment->stringRemplace($_POST['name-contact']);
-          $subject = $this->ctrlContactTreatment->stringRemplace($_POST['subject-contact']);
-          $message = $this->ctrlContactTreatment->stringRemplace($_POST['message-contact']);*/
-          $this->ctrlContactTreatment->insertContact($_POST['email-contact'], $_POST['name-contact'], $_POST['subject-contact'], $_POST['message-contact']);
+        $this->ctrlContactTreatment->issetContact();
         }
       }
 
