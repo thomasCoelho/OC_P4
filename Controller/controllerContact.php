@@ -1,6 +1,6 @@
 <?php 
 
-require_once 'modele/modeleContact.php';
+require_once 'Model/modeleContact.php';
 require_once 'Vue/vue.php';
 
 class ControllerContact{
@@ -28,6 +28,20 @@ class ControllerContact{
 		try {
 			$vue = new Vue('Contact');
 			$vue->generer(array('contactStatus' => $this->contactStatus));
+		} 
+		catch (Exception $e) {
+		    echo $e->getMessage(), "\n";
+		}
+	}
+}
+	/*GET ACCUEIL */
+
+Class ControllerAccueil {
+
+	function getAccueil(){
+		try {
+	    	$vue = new Vue('Accueil');
+			$vue->generer(array());
 		} 
 		catch (Exception $e) {
 		    echo $e->getMessage(), "\n";
