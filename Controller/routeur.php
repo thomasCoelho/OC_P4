@@ -1,14 +1,12 @@
 <?php
-require_once 'controller/controllerAccueil.php';
-require_once 'controller/controllerContact.php';
-require_once 'controller/controllerBillets.php';
-require_once 'controller/controllerBillet.php';
-require_once 'controller/controllerAdwinWrite.php';
-require_once 'controller/controllerUpdateBillet.php';
-require_once 'controller/controllerSession.php';
-require_once 'controller/controllerAdminHome.php';
-require_once 'controller/controllerDisconnect.php';
-require_once 'controller/controllerCookie.php';
+require_once 'Controller/controllerAccueil.php';
+require_once 'Controller/controllerContact.php';
+require_once 'Controller/controllerBillet.php';
+require_once 'Controller/controllerAdwinWrite.php';
+require_once 'Controller/controllerSession.php';
+require_once 'Controller/controllerAdminHome.php';
+require_once 'Controller/controllerDisconnect.php';
+require_once 'Controller/controllerCookie.php';
 require_once 'Vue/vue.php';
 
 class Routeur {
@@ -70,19 +68,19 @@ class Routeur {
                 $this->ctrlBillet->deleteComment($commentId);
               }              
             }
-            $this->ctrlBillet->getRead($idBillet);      
+            $this->ctrlBillet->getReadBillet($idBillet);      
           }
         }
         else{    
-          $this->ctrlRead = new ControllerBillets();
-          $this->ctrlRead->getRead();
+          $this->ctrlRead = new ControllerBillet();
+          $this->ctrlRead->getReadBillets();
          }
       }
 
       if ($_GET['action'] == 'traitementComment'){
         if (isset($_POST['user-pseudo'], $_POST['user-text'], $_POST['billet-id'])) {
           $this->ctrlTreatmentComments = new ControllerBillet();
-          $this->ctrlTreatmentComments->issetComments(htmlspecialchars($_POST['user-pseudo']),htmlspecialchars($_POST['user-text']), htmlspecialchars($_POST['billet-id']));
+          $this->ctrlTreatmentComments->issetComments(addslashes(htmlspecialchars($_POST['user-pseudo'])),addslashes(htmlspecialchars($_POST['user-text'])), addslashes(htmlspecialchars($_POST['billet-id'])));
         }
       }  
 
@@ -105,13 +103,13 @@ class Routeur {
       } 
 
       if($_GET['action'] == "traitementAdminWrite" AND isset($_GET['billet']) AND !isset($_GET['edit'])){
-        $this->ctrlUpdateBillet = new ControllerUpdateBillet();
-        $this->ctrlUpdateBillet->getRead(htmlspecialchars($_GET['billet']));
+        $this->ctrlUpdateBillet = new ControllerBillet();
+        $this->ctrlUpdateBillet->getReadUpdateBillet(htmlspecialchars($_GET['billet']));
       }
 
       if ($_GET['action'] == "traitementAdminWrite" AND isset($_GET['edit']) AND isset($_GET['billet'])) {
         if(isset($_POST['radio-edit'])){
-          $this->ctrlUpdateBillet = new ControllerUpdateBillet();
+          $this->ctrlUpdateBillet = new ControllerBillet();
           $id = htmlspecialchars($_GET['billet']);
           if($_POST['radio-edit'] == "Modifier"){
             $image = htmlspecialchars($_POST["img-edit-write"]);
