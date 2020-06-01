@@ -77,7 +77,7 @@ class Routeur {
       if ($_GET['action'] == 'traitementComment'){
         if (isset($_POST['user-pseudo'], $_POST['user-text'], $_POST['billet-id'])) {
           $this->ctrlTreatmentComments = new ControllerBillet();
-          $this->ctrlTreatmentComments->issetComments(addslashes(htmlspecialchars($_POST['user-pseudo'])),addslashes(htmlspecialchars($_POST['user-text'])), addslashes(htmlspecialchars($_POST['billet-id'])));
+          $this->ctrlTreatmentComments->issetComments();
         }
       }  
 

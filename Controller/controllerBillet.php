@@ -16,7 +16,7 @@ class ControllerBillet {
 
   	function issetComments($pseudo, $text, $idBillet){
 		if(isset($pseudo, $text, $idBillet)){			
-			$this->comments->insertComment($pseudo, $text, $idBillet);
+			$this->comments->insertComment(addslashes(htmlspecialchars($_POST['user-pseudo'])),addslashes(htmlspecialchars($_POST['user-text'])), addslashes(htmlspecialchars($_POST['billet-id'])));
 			header('Location: index.php?action=Lecture&id='.$idBillet);
 		}
 		else{
