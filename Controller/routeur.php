@@ -82,17 +82,9 @@ class Routeur {
         $this->ctrlAdminTraitementConnect->isIdsCorrect();
       }
 
-      if($_GET['action'] == 'AdminHome'){
-        if(isset($_COOKIE['idSession']) AND $_COOKIE['idSession'] != NULL){
-          if($_SESSION['pseudo'] == $_COOKIE['idSession']){ 
-            $this->ctrlAdminHome = new ControllerAdminHome();
-                   
-            }
-            $this->ctrlAdminHome->getRead();
-          }
-        else{
-          header('Location:index.php?action=AdminConnect');
-        }
+      if($_GET['action'] == 'AdminHome'){ 
+        $this->ctrlAdminHome = new ControllerAdminHome();
+        $this->ctrlAdminHome->getRead();
       }  
 
       if ($_GET['action'] == 'Deconnection') {
