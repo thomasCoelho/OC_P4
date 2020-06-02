@@ -96,27 +96,11 @@ class Routeur {
       if ($_GET['action'] == 'AdminConnect'){
         $this->ctrlAdminConnect = new ControllerSession();
         $this->ctrlAdminConnect->getRead();
-        if(isset($_POST['pseudo-connect']) AND isset($_POST['password-connect'])){
-          $pseudo = htmlspecialchars($_POST['pseudo-connect']);
-          $password = htmlspecialchars($_POST['password-connect']);
-        }
       }
 
       if ($_GET['action'] == 'traitementAdminConnect'){
         $this->ctrlAdminTraitementConnect = new ControllerSession();
-                
-        if(isset($_POST['pseudo-connect']) AND isset($_POST['password-connect'])){          
-          $pseudo = htmlspecialchars($_POST['pseudo-connect']);
-          $password = htmlspecialchars($_POST['password-connect']);
-          if($this->ctrlAdminTraitementConnect->isIdsCorrect($pseudo, $password)){
-            setcookie('idSession', $pseudo, time() + 24*3600, null, null, false, true);
-            setcookie('wrongPass', time() + 15, null, null, false, true);
-          }
-          else{
-            header('Location: index.php?action=AdminConnect');
-            setcookie('wrongPass','Mauvais identifiants',time() + 15, null, null, false, true);
-          }        
-        }
+        $this->ctrlAdminTraitementConnect->isIdsCorrect()
       }
 
       if($_GET['action'] == 'AdminHome'){

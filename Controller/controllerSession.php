@@ -1,6 +1,6 @@
 <?php 
 
-require_once 'modele/modeleSession.php';
+require_once 'Model/modeleSession.php';
 require_once 'Vue/vue.php';
 
 class ControllerSession{
@@ -24,20 +24,29 @@ class ControllerSession{
 
 	public $isPasswordCorrect;
 
-	function isIdsCorrect($pseudo, $pass){
-		if($pseudo != null){
-			$this->session->adminIds($pseudo);
-			$tr = $this->session->adminIds($pseudo);
-			$passSecure = htmlspecialchars($_POST['password-connect']);
-			$passok = password_verify($passSecure, $tr);
-			if ($passok) {
-		        $_SESSION['pseudo'] = $pseudo;
-		        header('Location: index.php?action=AdminHome');
-		        return true;	        
-		    }
-		    else {
-		    	return false;
-		    }
+	function isIdsCorrect(){
+		if(isset($_POST['pseudo-connect']) AND isset($_POST['password-connect'])){
+        	$pseudo = htmlspecialchars($_POST['pseudo-connect']);
+        	$password = htmlspecialchars($_POST['password-connect']);
+			if($pseudo != null AND $password != null){
+				$this->session->adminIds($pseudo);
+				$pseudoTest = $this->session->adminIds($pseudo);
+				$passSecure = htmlspecialchars($_POST['password-connect']);
+				$passok = password_verify($passSecure, $pseudoTest);
+				if ($passok) {
+			        $_SESSION['pseudo'] = $pseudo;
+			        header('Location: index.php?action=AdminHome');			        
+			        setcookie('idSession', $pseudo, time() + 24*3600, null, null, false, true);
+        			return true;
+          		else{
+           			header('Location: index.php?action=AdminConnect');
+            		setcookie('wrongPass','Mauvais identifiants',time() + 15, null, null, false, true);
+          }    	        
+			    }
+			    else {
+			    	return false;
+			    }
+			}
 		}
 	}
 }
