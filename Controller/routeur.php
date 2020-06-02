@@ -46,14 +46,15 @@ class Routeur {
 
       if ($_GET['action'] == 'Lecture'){        
         $this->ctrlBillet = new ControllerBillet();
-        $this->ctrlBillet->issetBillet();            
         $this->ctrlBillet->signalComment();
         $this->ctrlBillet->deleteComment();
+        $this->ctrlBillet->issetBillet();            
+        
       }
 
       if ($_GET['action'] == 'traitementComment'){
           $this->ctrlTreatmentComments = new ControllerBillet();
-          $this->ctrlTreatmentComments->issetComments();
+          $this->ctrlTreatmentComments->issetComments();      
       }  
 
       if ($_GET['action'] == 'AdminWrite'){
@@ -63,34 +64,12 @@ class Routeur {
         }
       }
 
-      if ($_GET['action'] == 'traitementAdminWrite' AND !isset($_GET['billet'])){
+      if ($_GET['action'] == 'traitementAdminWrite'){
+        $this->ctrlUpdateBillet = new ControllerEditBillet();
+        $this->ctrlUpdateBillet->getRead();
         $this->ctrlTraitementAdminWrite = new ControllerAdminWrite();
         $this->ctrlTraitementAdminWrite->getRead();
         $this->ctrlTraitementAdminWrite->issetAdminWrite();
-      } 
-
-      if($_GET['action'] == "traitementAdminWrite" AND isset($_GET['billet']) AND !isset($_GET['edit'])){
-        $this->ctrlUpdateBillet = new ControllerEditBillet();
-        $this->ctrlUpdateBillet->getRead();
-      }
-
-      if ($_GET['action'] == "traitementAdminWrite" AND isset($_GET['edit']) AND isset($_GET['billet'])) {
-        if(isset($_POST['radio-edit'])){
-          $this->ctrlUpdateBillet = new ControllerBillet();
-          $id = htmlspecialchars($_GET['billet']);
-          if($_POST['radio-edit'] == "Modifier"){
-            $image = htmlspecialchars($_POST["img-edit-write"]);
-            $imageTraited = $this->ctrlUpdateBillet->stringRemplaceP($image);
-            $title = htmlspecialchars($_POST["title-edit-write"]);
-            $text = htmlspecialchars($_POST["text-edit-write"]);
-            $this->ctrlUpdateBillet->editBillet($imageTraited, $title, $text, $id);
-            header('Location: index.php?action=Lecture');
-          }
-          if($_POST['radio-edit'] == "Supprimer"){
-            $this->ctrlUpdateBillet->deleteBillet($id);
-            header('Location: index.php?action=Lecture');            
-          }
-        }
       }
 
       if ($_GET['action'] == 'AdminConnect'){
@@ -100,31 +79,17 @@ class Routeur {
 
       if ($_GET['action'] == 'traitementAdminConnect'){
         $this->ctrlAdminTraitementConnect = new ControllerSession();
-        $this->ctrlAdminTraitementConnect->isIdsCorrect()
+        $this->ctrlAdminTraitementConnect->isIdsCorrect();
       }
 
       if($_GET['action'] == 'AdminHome'){
         if(isset($_COOKIE['idSession']) AND $_COOKIE['idSession'] != NULL){
           if($_SESSION['pseudo'] == $_COOKIE['idSession']){ 
             $this->ctrlAdminHome = new ControllerAdminHome();
-            if(isset($_GET['contact'])){
-              $idContact = htmlspecialchars(intval($_GET['contact']));
-              $this->ctrlAdminHome->deleteContact($idContact); 
-            }
-            if(isset($_GET['statusComm'], $_GET['comment'])){
-              $idComm = htmlspecialchars($_GET['comment']);
-              if ($_GET['statusComm'] == 'safeComm') {
-                $this->ctrlAdminHome->safeComment($idComm);
-                header('Location:index.php?action=AdminHome');
-              }
-              if ($_GET['statusComm'] == 'deleteComm') {
-                $this->ctrlAdminHome->deleteComment($idComm);
-                header('Location:index.php?action=AdminHome'); 
-              }        
+                   
             }
             $this->ctrlAdminHome->getRead();
           }
-        }
         else{
           header('Location:index.php?action=AdminConnect');
         }

@@ -13,14 +13,13 @@ class ControllerBillet {
 		$this->comments = new Billet();
 	}
 
-
   	function issetComments(){
 		if(isset($_POST['user-pseudo'], $_POST['user-text'], $_POST['billet-id'])){			
 			$this->comments->insertComment(addslashes(htmlspecialchars($_POST['user-pseudo'])),addslashes(htmlspecialchars($_POST['user-text'])), addslashes(htmlspecialchars($_POST['billet-id'])));
-			header('Location: index.php?action=Lecture&id='.$idBillet);
+			header('Location: index.php?action=Lecture&id='.htmlspecialchars(intval($_POST['billet-id'])));
 		}
 		else{
-			header('Location: index.php?action=Lecture&id='.$idBillet);	
+			header('Location: index.php?action=Lecture&id='.htmlspecialchars(intval($_POST['billet-id'])));	
 		}
 	}
 	function issetBillet(){
@@ -75,8 +74,15 @@ class ControllerBillet {
 /* EDIT BILLET */
 class ControllerEditBillet {
 
+	private $billet;
+	private $comments;
+
+	function __construct(){
+		$this->billet = new Billet();
+	}
+
 	function getRead(){
-		if (isset($_GET['billet'])){
+		if (isset($_GET['billet']) AND !isset($_GET['edit'])){
 			$idBillet = htmlspecialchars(intval($_GET['billet']));
 			$billet = $this->billet->getBillet($idBillet);
 			try {
@@ -87,12 +93,24 @@ class ControllerEditBillet {
 			    echo $e->getMessage(), "\n";
 			}
 		}
-	}
-	
-
-	function editBillet($image, $title, $text, $id){
-		if(isset($image, $title, $text, $id)){
-			$this->billet->editBillet($image, $title, $text, $id);
+		else if(isset($_GET['edit']) AND isset($_GET['billet'])){
+			if(isset($_POST['radio-edit'])){
+	          $id = htmlspecialchars(intval($_GET['billet']));
+	        	if($_POST['radio-edit'] == "Modifier"){
+		          	if(isset($_POST["img-edit-write"], $_POST["title-edit-write"], $_POST["text-edit-write"], $id)){
+			            $image = htmlspecialchars($_POST["img-edit-write"]);
+			            $imageTraited = stringRemplaceP($image);
+			            $title = htmlspecialchars($_POST["title-edit-write"]);
+			            $text = htmlspecialchars($_POST["text-edit-write"]);
+			            $this->billet->editBillet($imageTraited, $title, $text, $id);
+			            header('Location: index.php?action=Lecture');
+		        	}
+	        	}
+	        	if($_POST['radio-edit'] == "Supprimer"){
+		            $this->billet->deleteBillet($id);
+		            header('Location: index.php?action=Lecture');            
+		        }
+        	}
 		}
 	}
 
@@ -104,9 +122,5 @@ class ControllerEditBillet {
 	function deleteBillet($id){
 		$this->billet->deleteBillet($id);
 		$this->comments->deleteComments($id);
-	}
-
-	
-
-	
+	}	
 }
