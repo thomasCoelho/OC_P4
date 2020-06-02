@@ -58,10 +58,8 @@ class Routeur {
       }  
 
       if ($_GET['action'] == 'AdminWrite'){
-        if($this->ctrlCookie->testCookieConnect() == true){
-          $this->ctrlAdminWrite = new ControllerAdminWrite();
-          $this->ctrlAdminWrite->getRead();
-        }
+        $this->ctrlAdminWrite = new ControllerAdminWrite();
+        $this->ctrlAdminWrite->getRead();
       }
 
       if ($_GET['action'] == 'traitementAdminWrite'){
@@ -90,11 +88,9 @@ class Routeur {
       if ($_GET['action'] == 'Deconnection') {
         $this->ctrlDisconnect = new DisconnectVue();
         $this->ctrlDisconnect->getDisconnect();
-        setcookie('wrongPass', "", time() + 15, null, null, false, true);
       }
 
       if ($_GET['action'] == 'DeconnectionTraitement') {
-        setcookie('idSession',"", time() + 24*3600, null, null, false, true);
         header('Location:index.php?action=Accueil');
       }
     } else{
