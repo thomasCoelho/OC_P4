@@ -38,15 +38,39 @@ class ControllerSession{
 			        header('Location: index.php?action=AdminHome');			        
 			        setcookie('idSession', $pseudo, time() + 24*3600, null, null, false, true);
         			return true;
+        		}
           		else{
            			header('Location: index.php?action=AdminConnect');
             		setcookie('wrongPass','Mauvais identifiants',time() + 15, null, null, false, true);
-          }    	        
-			    }
-			    else {
+          		} 
+            }   	        
+			else {
 			    	return false;
-			    }
 			}
 		}
 	}
 }
+
+
+/*deconnection  */
+
+class DisconnectVue{
+
+	function getDisconnect(){
+		try {
+			$vue = new Vue('Disconnect');
+			$vue->generer(array());
+		} 
+		catch (Exception $e) {
+		    echo $e->getMessage(), "\n";
+		}
+	}
+}
+
+
+class Disconnect{
+
+	function sessionClose(){
+		setcookie('idSession', time() + 24*3600, null, null, false, true);
+	}
+}	

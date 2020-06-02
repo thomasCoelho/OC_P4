@@ -39,18 +39,36 @@ class ControllerAdminHome{
 		}
 	}
 
-	function safeComment($idComm){
-		$this->controllerModeration->safeComment($idComm);
-	}
+	function issetAdminHome(){
+		if(isset($_GET['contact'])){
+	        $idContact = htmlspecialchars(intval($_GET['contact']));
+	        $this->ctrlAdminHome->deleteContact($idContact); 
+	    }
+	    if(isset($_GET['statusComm'], $_GET['comment'])){
+	        $idComm = htmlspecialchars($_GET['comment']);
+	        if ($_GET['statusComm'] == 'safeComm') {
+	            $this->ctrlAdminHome->safeComment($idComm);
+	            header('Location:index.php?action=AdminHome');
+	        }
+	        if ($_GET['statusComm'] == 'deleteComm') {
+	            $this->ctrlAdminHome->deleteComment($idComm);
+	            header('Location:index.php?action=AdminHome'); 
+	        } 
+	    }
 
-	function deleteComment($idComm){
-		$this->controllerModeration->deleteComment($idComm);
-	}
+		function safeComment($idComm){
+			$this->controllerModeration->safeComment($idComm);
+		}
 
-	function deleteContact($idContact){
-		$this->controllerContact->deleteContact($idContact);
-	}
-}	
+		function deleteComment($idComm){
+			$this->controllerModeration->deleteComment($idComm);
+		}
+
+		function deleteContact($idContact){
+			$this->controllerContact->deleteContact($idContact);
+		}
+	}	
+}
 
 	/* ADMIN WRITE */
 class ControllerAdminWrite{
@@ -61,12 +79,14 @@ class ControllerAdminWrite{
 	}
 
 	function getRead(){
-		try {
-			$vue = new Vue('AdminWrite');
-			$vue->generer(array());
-		} 
-		catch (Exception $e) {
-		    echo $e->getMessage(), "\n";
+		if (!isset($_GET['billet']) AND !isset($_GET['edit'])){
+			try {
+				$vue = new Vue('AdminWrite');
+				$vue->generer(array());
+			} 
+			catch (Exception $e) {
+			    echo $e->getMessage(), "\n";
+			}
 		}
 	}
 
@@ -80,10 +100,14 @@ class ControllerAdminWrite{
     	return $string;
 	}
 
-
-	function issetAdminWrite($image, $title, $text){
-		if(isset($_POST['img-admin-write'], $_POST['title-admin-write'], $_POST['text-admin-write']) AND strlen($_POST['img-admin-write']) AND strlen($_POST['title-admin-write']) !=0 AND strlen($_POST['text-admin-write'])){		
-			$this->contenuAdmin->insertAdminWrite($image, $title, $text);
+	function issetAdminWrite(){
+		if(isset($_POST['img-admin-write'], $_POST['title-admin-write'], $_POST['text-admin-write']) AND strlen($_POST['img-admin-write']) AND strlen($_POST['title-admin-write']) !=0 AND strlen($_POST['text-admin-write']) AND !isset($_GET['billet'])){
+			$image = htmlspecialchars($_POST['img-admin-write']);
+        	$imageTraited = $this->ctrlTraitementAdminWrite->stringRemplaceP($image);
+        	$title = htmlspecialchars($_POST['title-admin-write']);
+        	$text = htmlspecialchars($_POST['text-admin-write']);
+        	$textTraited = $this->ctrlTraitementAdminWrite->stringRemplace($text);
+			$this->contenuAdmin->insertAdminWrite($imageTraited, $title, $textTraited);
 		}
 		else{
 			header('location: index.php?action=AdminWrite');
@@ -91,26 +115,3 @@ class ControllerAdminWrite{
 	}
 
 }
-
-/*deconnection  */
-
-class DisconnectVue{
-
-	function getDisconnect(){
-		try {
-			$vue = new Vue('Disconnect');
-			$vue->generer(array());
-		} 
-		catch (Exception $e) {
-		    echo $e->getMessage(), "\n";
-		}
-	}
-}
-
-
-class Disconnect{
-
-	function sessionClose(){
-		setcookie('idSession', time() + 24*3600, null, null, false, true);
-	}
-}	
